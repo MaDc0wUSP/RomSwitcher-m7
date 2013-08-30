@@ -207,6 +207,12 @@ on fs
     mkdir /firmware/q6 0771 system system
 
     mount_all ./fstab.qcom
+    mkdir /1stdata/
+    mkdir /1stdata/dual
+    mkdir /1stdata/dual/2nddata 0775 system system
+    mkdir /1stdata/dual/cache/
+    mkdir /1stdata/dual/cache/2nd 0775 system cache
+    exec /sbin/ext/db-bindmount.sh
 
     insmod /system/lib/modules/dm-crypt.ko
 
@@ -483,7 +489,7 @@ service netmgrd /system/bin/netmgrd
     class core
 
 # virtual sdcard daemon running as media_rw (1023)
-service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
+service sdcard /system/bin/sdcard /1stdata/media /mnt/shell/emulated 1023 1023
     class late_start
 
 service thermald /system/bin/thermald
