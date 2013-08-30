@@ -1,3 +1,1 @@
-ui_print("Flashing...");
-package_extract_file("boot.img", "/dev/block/platform/msm_sdcc.1/by-name/boot");
-ui_print("Done...");
+package_extract_file("boot.img", "/dev/block/mmcblk0p33");
