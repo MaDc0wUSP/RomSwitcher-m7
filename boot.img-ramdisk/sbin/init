@@ -5,17 +5,14 @@ cd /
 busybox mount -t proc proc /proc
 busybox mount -t sysfs sysfs /sys
 
-mkdir -p /dev/block
-mknod /dev/block/mmcblk0p36 b 179 36
-mknod /dev/block/loop0 b 7 0
-
+mkdir /dev
+mkdir /dev/block
+mknod /dev/block/mmcblk0p36 b 259 12
 mount -t ext4 /dev/block/mmcblk0p36 /system
 
 if grep -q ro.slim.version /system/build.prop; then
 	mv -f init.rc.slim init.rc
 fi
-
-umount -f /system
 
 chmod 755 /int.0
 chmod 644 /*.qcom
