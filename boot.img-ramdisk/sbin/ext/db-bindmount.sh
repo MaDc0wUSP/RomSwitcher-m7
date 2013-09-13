@@ -1,7 +1,6 @@
 #!/sbin/busybox sh
 
 mkdir -p /1stdata/dual/2nddata
-mkdir -p /1stdata/dual/2nddata/app
 mount --bind /1stdata/dual/2nddata /data
 mount --bind /1stdata/app /data/app
 
