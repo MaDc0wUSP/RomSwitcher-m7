@@ -3,6 +3,7 @@
 mkdir -p /1stdata/dual/2nddata
 mount --bind /1stdata/dual/2nddata /data
 mount --bind /1stdata/app /data/app
+mount --bind /1stdata/app-asec /data/app-asec
 
 /sbin/busybox mount -t rootfs -o remount,rw rootfs
 mount -t tmpfs tmpfs /system/lib/modules
