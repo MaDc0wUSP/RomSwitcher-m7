@@ -1,15 +1,15 @@
 #!/sbin/busybox sh
 
-mkdir -p /1stdata/dual/2nddata
-mount --bind /1stdata/dual/2nddata /data
-mount --bind /1stdata/app /data/app
-mount --bind /1stdata/app-asec /data/app-asec
-mount --bind /1stdata/misc/systemkeys /data/misc/systemkeys
+mkdir -p /.firstrom/media/.secondrom/data
+mount --bind /.firstrom/media/.secondrom/data /data
+mount --bind /.firstrom/app /data/app
+mount --bind /.firstrom/app-asec /data/app-asec
+mount --bind /.firstrom/misc/systemkeys /data/misc/systemkeys
 
 mount -t rootfs -o remount,rw rootfs
 mount -t tmpfs tmpfs /system/lib/modules
 
-chmod 771 /1stdata
+chmod 771 /.firstrom
 chmod 755 /system
 ln -s /lib/modules/* /system/lib/modules/
 
