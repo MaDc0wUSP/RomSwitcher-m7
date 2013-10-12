@@ -43,7 +43,6 @@ loglevel 3
     export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
     export LD_LIBRARY_PATH /vendor/lib:/system/lib
     export ANDROID_BOOTLOGO 1
-    export ANDROID_CACHE /cache
     export ANDROID_ROOT /system
     export ANDROID_ASSETS /system/app
     export ANDROID_DATA /data
@@ -57,9 +56,6 @@ loglevel 3
 # Backward compatibility
     symlink /system/etc /etc
     symlink /sys/kernel/debug /d
-    mkdir /system
-    symlink /.firstrom/media/.thirdrom/cache /cache
-    symlink /.firstrom/media/.thirdrom/data /data
 
 # Right now vendor lives on the same filesystem as system,
 # but someday that may change.
@@ -258,9 +254,6 @@ on post-fs-data
     mkdir /data/dalvik-cache 0771 system system
     chown system system /data/dalvik-cache
     chmod 0771 /data/dalvik-cache
-    mkdir /cache/dalvik-cache 0771 system system
-    chown system system /cache/dalvik-cache
-    chmod 0771 /cache/dalvik-cache
 
     # create resource-cache and double-check the perms
     mkdir /data/resource-cache 0771 system system
