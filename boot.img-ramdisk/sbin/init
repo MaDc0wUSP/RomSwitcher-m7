@@ -13,7 +13,7 @@ mount -t ext4 /dev/block/mmcblk0p37 /data
 
 ROM=`cat /data/media/.rom`
 
-if grep -q androidboot.mode=recovery /proc/cmdline ; then
+if grep -q "androidboot.mode=recovery" /proc/cmdline ; then
   mv -f /res/recovery/* /
 else
   mv -f /res/boot/* /
