@@ -1,1 +1,1 @@
-package_extract_file("boot.img", "/dev/block/platform/msm_sdcc.1/by-name/boot");
+package_extract_file("boot.img", "/dev/block/mmcblk0p33");
