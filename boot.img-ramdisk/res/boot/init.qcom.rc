@@ -206,13 +206,13 @@ on fs
     mkdir /firmware/mdm 0771 system system
     mkdir /firmware/q6 0771 system system
 
+    exec /sbin/ext/mount_system.sh secondary
     mount_all ./fstab.qcom
     mkdir /.firstrom/
     mkdir /.firstrom/media
     mkdir /.firstrom/media/.secondrom
     mkdir /.firstrom/media/.secondrom/data 0775 system system
     mkdir /.firstrom/media/.secondrom/cache 0775 system cache
-    exec /sbin/ext/mount_system.sh secondary
     exec /sbin/ext/mount.sh secondary
 
     insmod /system/lib/modules/dm-crypt.ko
