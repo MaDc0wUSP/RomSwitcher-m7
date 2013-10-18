@@ -26,6 +26,28 @@ elif [ $FILESYSTEM == "tertiary" ]; then
       # create ext4 filesystem
       $BB mke2fs -F -T ext4 $third || exit 1
    fi
+elif [ $FILESYSTEM == "quaternary" ]; then
+
+   $BB mkdir -p /data/media/.fourthrom
+   fourth=/data/media/.fourthrom/system.img
+
+   if $BB [ ! -f $fourth ] ; then
+      # create a file 650MB
+      $BB dd if=/dev/zero of=$fourth bs=1024 count=657286 || exit 1
+      # create ext4 filesystem
+      $BB mke2fs -F -T ext4 $fourth || exit 1
+   fi
+   elif [ $FILESYSTEM == "quinary" ]; then
+
+   $BB mkdir -p /data/media/.fifthrom
+   fifth=/data/media/.fifthrom/system.img
+
+   if $BB [ ! -f $fifth ] ; then
+      # create a file 650MB
+      $BB dd if=/dev/zero of=$fifth bs=1024 count=657286 || exit 1
+      # create ext4 filesystem
+      $BB mke2fs -F -T ext4 $fifth || exit 1
+   fi
 
 fi
 

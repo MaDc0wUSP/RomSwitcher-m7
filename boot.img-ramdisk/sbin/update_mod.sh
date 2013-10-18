@@ -55,6 +55,40 @@ elif [ "$ROM" == "tertiary" ]; then
 
    sed 's|run_program("/sbin/busybox", "mount", "/data");|run_program("/sbin/mount_recovery.sh", "tertiary");|g' -i "$MOUNTPOINT"/rs/$updater_script_path || exit 1
 
+elif [ "$ROM" == "quaternary" ]; then
+   #### use mount script ####
+   sed 's|mount("ext4", "EMMC", "/dev/block/mmcblk0p35", "/system");|run_program("/sbin/mount_recovery.sh", "quaternary");|g' -i "$MOUNTPOINT"/rs/$updater_script_path || exit 1
+
+   ### also use script for formating ###
+   sed 's|format("ext4", "EMMC", "/dev/block/mmcblk0p35", "0", "/system");|run_program("/sbin/system_format.sh", "quaternary");|g' -i "$MOUNTPOINT"/rs/$updater_script_path || exit 1
+
+   sed 's|format("ext4", "EMMC", "/dev/block/mmcblk0p35");|run_program("/sbin/system_format.sh", "quaternary");|g' -i "$MOUNTPOINT"/rs/$updater_script_path || exit 1
+
+   # get the kernel
+   sed 's|package_extract_file("boot.img", "/dev/block/mmcblk0p33");|#|g' -i "$MOUNTPOINT"/rs/$updater_script_path || exit 1
+
+   # busybox mount
+   sed 's|run_program("/sbin/busybox", "mount", "/system");|run_program("/sbin/mount_recovery.sh", "quaternary");|g' -i "$MOUNTPOINT"/rs/$updater_script_path || exit 1
+
+   sed 's|run_program("/sbin/busybox", "mount", "/data");|run_program("/sbin/mount_recovery.sh", "quaternary");|g' -i "$MOUNTPOINT"/rs/$updater_script_path || exit 1
+
+elif [ "$ROM" == "quinary" ]; then
+   #### use mount script ####
+   sed 's|mount("ext4", "EMMC", "/dev/block/mmcblk0p35", "/system");|run_program("/sbin/mount_recovery.sh", "quinary");|g' -i "$MOUNTPOINT"/rs/$updater_script_path || exit 1
+
+   ### also use script for formating ###
+   sed 's|format("ext4", "EMMC", "/dev/block/mmcblk0p35", "0", "/system");|run_program("/sbin/system_format.sh", "quinary");|g' -i "$MOUNTPOINT"/rs/$updater_script_path || exit 1
+
+   sed 's|format("ext4", "EMMC", "/dev/block/mmcblk0p35");|run_program("/sbin/system_format.sh", "quinary");|g' -i "$MOUNTPOINT"/rs/$updater_script_path || exit 1
+
+   # get the kernel
+   sed 's|package_extract_file("boot.img", "/dev/block/mmcblk0p33");|#|g' -i "$MOUNTPOINT"/rs/$updater_script_path || exit 1
+
+   # busybox mount
+   sed 's|run_program("/sbin/busybox", "mount", "/system");|run_program("/sbin/mount_recovery.sh", "quinary");|g' -i "$MOUNTPOINT"/rs/$updater_script_path || exit 1
+
+   sed 's|run_program("/sbin/busybox", "mount", "/data");|run_program("/sbin/mount_recovery.sh", "quinary");|g' -i "$MOUNTPOINT"/rs/$updater_script_path || exit 1
+
 else
    exit 1
    echo "error update_mod.sh"

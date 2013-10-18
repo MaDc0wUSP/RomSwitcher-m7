@@ -72,6 +72,54 @@ elif [ "$1" == "tertiary" ] ; then
    $BB mkdir -p /system
    $MOUNT -t ext4 -o rw /.firstrom/media/.thirdrom/system.img /system
 
+elif [ "$1" == "quaternary" ] ; then
+   $UMOUNT /system
+   $UMOUNT /data
+   $UMOUNT /cache
+
+   $BB mkdir -p /.firstrom
+   $BB mkdir -p /.firstcache
+   $MOUNT -t ext4 -o rw /dev/block/$BLOCKDEVICE /.firstrom
+   $MOUNT -t ext4 -o rw /dev/block/$CACHEPARTITION /.firstcache
+
+   $BB mkdir -p /data
+   $BB mkdir -p /.firstrom/media/.fourthrom/data
+   $MOUNT --bind /.firstrom/media/.fourthrom/data /data
+
+   $BB mkdir -p /cache
+   $BB mkdir -p /.firstrom/media/.fourthrom/cache
+   $MOUNT --bind /.firstrom/media/.fourthrom/cache /cache
+
+   $BB mkdir -p /data/media
+   $MOUNT --bind /.firstrom/media /data/media
+
+   $BB mkdir -p /system
+   $MOUNT -t ext4 -o rw /.firstrom/media/.fourthrom/system.img /system
+
+elif [ "$1" == "quinary" ] ; then
+   $UMOUNT /system
+   $UMOUNT /data
+   $UMOUNT /cache
+
+   $BB mkdir -p /.firstrom
+   $BB mkdir -p /.firstcache
+   $MOUNT -t ext4 -o rw /dev/block/$BLOCKDEVICE /.firstrom
+   $MOUNT -t ext4 -o rw /dev/block/$CACHEPARTITION /.firstcache
+
+   $BB mkdir -p /data
+   $BB mkdir -p /.firstrom/media/.fifthrom/data
+   $MOUNT --bind /.firstrom/media/.fifthrom/data /data
+
+   $BB mkdir -p /cache
+   $BB mkdir -p /.firstrom/media/.fifthrom/cache
+   $MOUNT --bind /.firstrom/media/.fifthrom/cache /cache
+
+   $BB mkdir -p /data/media
+   $MOUNT --bind /.firstrom/media /data/media
+
+   $BB mkdir -p /system
+   $MOUNT -t ext4 -o rw /.firstrom/media/.fifthrom/system.img /system
+
 else
    echo "missing paramter"
    exit 1

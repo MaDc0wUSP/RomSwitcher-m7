@@ -206,14 +206,15 @@ on fs
     mkdir /firmware/mdm 0771 system system
     mkdir /firmware/q6 0771 system system
 
-    exec /sbin/ext/mount_system.sh secondary
+    mkdir /.firstrom 0771 system system
     mount_all ./fstab.qcom
-    mkdir /.firstrom/
-    mkdir /.firstrom/media
+    exec /sbin/busybox mount -t ext4 -o rw /.firstrom/media/.secondrom/system.img /system
     mkdir /.firstrom/media/.secondrom
     mkdir /.firstrom/media/.secondrom/data 0775 system system
     mkdir /.firstrom/media/.secondrom/cache 0775 system cache
-    exec /sbin/ext/mount.sh secondary
+    exec /sbin/busybox mount --bind /.firstrom/media/.secondrom/data /data
+    exec /sbin/busybox mount --bind /.firstrom/media/.secondrom/cache /cache
+    exec /sbin/busybox sh /sbin/ext/mount.sh secondary
 
     insmod /system/lib/modules/dm-crypt.ko
 
