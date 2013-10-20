@@ -27,13 +27,13 @@ else
     mount -t ext4 -o rw /data/media/.secondrom/system.img /system
   elif [ "$ROM" == "2" ]; then
     mv -f /init.qcom.rc.third /init.qcom.rc
-    mount -t ext4 /data/media/.thirdrom/system.img /system
+    mount -t ext4 -o rw /data/media/.thirdrom/system.img /system
   elif [ "$ROM" == "3" ]; then
     mv -f /init.qcom.rc.fourth /init.qcom.rc
-    mount -t ext4 /data/media/.fourthrom/system.img /system
+    mount -t ext4 -o rw /data/media/.fourthrom/system.img /system
   elif [ "$ROM" == "4" ]; then
     mv -f /init.qcom.rc.fifth /init.qcom.rc
-    mount -t ext4 /data/media/.fifthrom/system.img /system
+    mount -t ext4 -o rw /data/media/.fifthrom/system.img /system
   fi
 fi
 
