@@ -13,10 +13,6 @@ chmod 755 /system
 ln -s /lib/modules/* /system/lib/modules/
 
 if [ "$ROM" == "secondary" ]; then
-    mkdir -p /.firstrom/media/.secondrom/data/app
-    cp -f /.firstrom/app/com.grarak.*.apk /.firstrom/media/.secondrom/data/app/
-    chmod 755 /.firstrom/media/.secondrom/data/app/*.apk
-
     if [ -e /romswitcher/appshare ]; then
         mkdir -p /data/app
         mkdir -p /data/app-asec
@@ -28,19 +24,19 @@ if [ "$ROM" == "secondary" ]; then
             mkdir -p /data/data
             mount --bind /.firstrom/data /data/data
         fi
+    else
+        cp -f /.firstrom/app/com.grarak.*.apk /system/app/
+        chmod 755 /system/app/*.apk
     fi
 elif [ "$ROM" == "tertiary" ]; then
-    mkdir -p /.firstrom/media/.thirdrom/data/app
-    cp -f /.firstrom/app/com.grarak.*.apk /.firstrom/media/.thirdrom/data/app/
-    chmod 755 /.firstrom/media/.thirdrom/data/app/*.apk
+    cp -f /.firstrom/app/com.grarak.*.apk /system/app/
+    chmod 755 /system/app/*.apk
 elif [ "$ROM" == "quaternary" ]; then
-    mkdir -p /.firstrom/media/.fourthrom/data/app
-    cp -f /.firstrom/app/com.grarak.*.apk /.firstrom/media/.fourthrom/data/app/
-    chmod 755 /.firstrom/media/.fourthrom/data/app/*.apk
+    cp -f /.firstrom/app/com.grarak.*.apk /system/app/
+    chmod 755 /system/app/*.apk
 elif [ "$ROM" == "quinary" ]; then
-    mkdir -p /.firstrom/media/.fifthrom/data/app
-    cp -f /.firstrom/app/com.grarak.*.apk /.firstrom/media/.fifthrom/data/app/
-    chmod 755 /.firstrom/media/.fifthrom/data/app/*.apk
+    cp -f /.firstrom/app/com.grarak.*.apk /system/app/
+    chmod 755 /system/app/*.apk
 fi
 
 mkdir -p /system/etc/init.d
