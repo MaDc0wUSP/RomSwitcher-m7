@@ -7,13 +7,9 @@ mount -t sysfs sysfs /sys
 
 mkdir -p /dev/block
 mknod /dev/block/mmcblk0p37 b 179 37
-mknod /dev/block/loop0 b 7 0
 
 mkdir /data
-mkdir /system
-
 mount -t ext4 /dev/block/mmcblk0p37 /data
-mkdir /data/media/rs
 
 ROM=`cat /data/media/.rom`
 
@@ -22,29 +18,16 @@ if grep -q "androidboot.mode=recovery" /proc/cmdline ; then
   mv -f /res/recovery/* /
 else
   mv -f /res/boot/* /
-  mv -f /init.rc /data/media/rs/
-  if [ "$ROM" == "1" ]; then
-    mount -t ext4 -o rw /data/media/.secondrom/system.img /system
-  elif [ "$ROM" == "2" ]; then
+  if [ "$ROM" == "2" ]; then
     mv -f /init.qcom.rc.third /init.qcom.rc
-    mount -t ext4 -o rw /data/media/.thirdrom/system.img /system
   elif [ "$ROM" == "3" ]; then
     mv -f /init.qcom.rc.fourth /init.qcom.rc
-    mount -t ext4 -o rw /data/media/.fourthrom/system.img /system
   elif [ "$ROM" == "4" ]; then
     mv -f /init.qcom.rc.fifth /init.qcom.rc
-    mount -t ext4 -o rw /data/media/.fifthrom/system.img /system
   fi
 fi
 
-if [ -f /system/framework/framework-pac.jar ]; then
-    sed 's|/system/framework/framework.jar:|/system/framework/framework.jar:/system/framework/framework-pac.jar:|' -i /data/media/rs/init.rc
-fi
-
-mv -f /data/media/rs/init.rc /
-
 umount -f /data
-umount -f /system
 
 chmod 755 /int.0
 chmod 644 /*.qcom
