@@ -14,15 +14,14 @@ mount -t ext4 /dev/block/mmcblk0p37 /data
 ROM=`cat /data/media/.rom`
 
 if grep -q "androidboot.mode=recovery" /proc/cmdline ; then
-  mv -f /res/etc /
   mv -f /res/recovery/* /
-else
-  mv -f /res/boot/* /
-  if [ "$ROM" == "2" ]; then
+  else
+    mv -f /res/boot/* /
+    if [ "$ROM" == "2" ]; then
     mv -f /init.qcom.rc.third /init.qcom.rc
-  elif [ "$ROM" == "3" ]; then
+    elif [ "$ROM" == "3" ]; then
     mv -f /init.qcom.rc.fourth /init.qcom.rc
-  elif [ "$ROM" == "4" ]; then
+    elif [ "$ROM" == "4" ]; then
     mv -f /init.qcom.rc.fifth /init.qcom.rc
   fi
 fi

@@ -6,11 +6,11 @@ mkdir -p /romswitcher
 mkdir -p /.firstrom/media/0/romswitcher-tmp
 mount --bind /.firstrom/media/0/romswitcher-tmp /romswitcher
 
-mount -o remount,rw /system
-mount -t rootfs -o remount,rw rootfs
-mount -t tmpfs tmpfs /system/lib/modules
-chmod 755 /system
-ln -s /lib/modules/* /system/lib/modules/
+# mount -o remount,rw /system
+# mount -t rootfs -o remount,rw rootfs
+# mount -t tmpfs tmpfs /system/lib/modules
+# chmod 755 /system
+# ln -s /lib/modules/* /system/lib/modules/
 
 if [ "$ROM" == "secondary" ]; then
     if [ -e /romswitcher/appshare ]; then
