@@ -6,12 +6,16 @@ mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 
 mkdir -p /dev/block
+
+mknod /dev/block/mmcblk0p35 b 179 35
 mknod /dev/block/mmcblk0p37 b 179 37
+mknod /dev/block/loop0 b 7 0
 
 mount -t ext4 /dev/block/mmcblk0p37 /data
 
 out() {
     umount -f /data
+    umount -f /system
 
     chmod 755 /init
     chmod 644 /*.qcom
@@ -21,15 +25,24 @@ out() {
     exec /init
 }
 
-ROM=`cat /data/media/.rom`
-
-if grep -q "androidboot.mode=recovery" /proc/cmdline ; then
-    mv -f /res/recovery/* /
-    out
+if grep -q androidboot.mode=recovery /proc/cmdline ; then
+	rm -f /data/media/rebootrs
+#	mv -f /res/etc /
+#	mv -f /res/boot/* /
+	mv -f /res/recovery/* /
+	out
 fi
 
-[ "$ROM" == "2" ] && mv -f /init.qcom.rc.third /init.qcom.rc
-[ "$ROM" == "3" ] && mv -f /init.qcom.rc.fourth /init.qcom.rc
-[ "$ROM" == "4" ] && mv -f /init.qcom.rc.fifth /init.qcom.rc
+[ -e /data/media/.rom ] || echo 1 > /data/media/.rom
+ROM=`cat /data/media/.rom`
+[ $ROM == 0 ] && ROM=1
+
+if [ "$ROM" == "1" ]; then
+	mount -t ext4 -o rw /dev/block/mmcblk0p35 /system
+else
+	mount --bind /data/media/.${ROM}rom/system /system
+fi
+
+mv -f /res/boot/* /
 
 out
