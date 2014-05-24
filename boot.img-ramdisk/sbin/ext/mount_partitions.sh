@@ -9,7 +9,7 @@ if [ $ROM != "1" ]; then
 		case $path in
 		*data) data=$par ;;
 		esac
-	done < /res/etc/recovery.fstab
+	done < /res/recovery/etc/recovery.fstab
 
 	umount -l /data
 	umount -l /cache

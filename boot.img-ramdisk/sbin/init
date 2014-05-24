@@ -21,7 +21,7 @@ out() {
     chmod 644 /*.qcom
     chmod 644 /*.rc
     chmod 644 /*.prop
-
+    chmod 755 /sbin/*
     exec /init
 }
 
@@ -29,7 +29,10 @@ if grep -q androidboot.mode=recovery /proc/cmdline ; then
 	rm -f /data/media/rebootrs
 #	mv -f /res/etc /
 #	mv -f /res/boot/* /
+#	rm -f /sbin/*
+#	mv -f /res/recovery/sbin/* /sbin/
 	mv -f /res/recovery/* /
+	mv -f /res/recovery/res/* /res/
 	out
 fi
 
